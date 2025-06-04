@@ -1,40 +1,17 @@
-FROM ubuntu:20.04
-# 強制重新部署 Ubuntu 版本 - 2025-06-04
+FROM n8nio/n8n:latest
 
-ENV DEBIAN_FRONTEND=noninteractive
+USER root
 
-# 安裝 Node.js 和基礎工具
-RUN apt-get update && apt-get install -y \
-    curl \
-    gnupg \
-    lsb-release
-
-# 安裝 Node.js 18
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
-    apt-get install -y nodejs
-
-# 安裝 FFmpeg 和中文字體
-RUN apt-get install -y \
+# 安裝 FFmpeg 和基礎中文字體
+RUN apk add --no-cache \
     ffmpeg \
     fontconfig \
-    fonts-wqy-zenhei
-
-# 創建用戶
-RUN useradd -m -s /bin/bash node
-
-# 安裝 n8n
-RUN npm install -g n8n
+    font-noto-cjk
 
 # 更新字體緩存
 RUN fc-cache -fv
 
 USER node
-WORKDIR /home/node
-
-EXPOSE 5678
-CMD ["n8n", "start"]
-USER node
-WORKDIR /home/node
 
 EXPOSE 5678
 CMD ["n8n", "start"]
