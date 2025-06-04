@@ -2,7 +2,7 @@ FROM n8nio/n8n:latest
 
 USER root
 
-# 安裝 FFmpeg 和基礎中文字體
+# 安裝 FFmpeg 和中文字體
 RUN apk add --no-cache \
     ffmpeg \
     fontconfig \
