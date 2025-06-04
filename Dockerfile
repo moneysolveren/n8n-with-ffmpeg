@@ -1,4 +1,5 @@
 FROM ubuntu:20.04
+# 強制重新部署 Ubuntu 版本 - 2025-06-04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -27,6 +28,11 @@ RUN npm install -g n8n
 # 更新字體緩存
 RUN fc-cache -fv
 
+USER node
+WORKDIR /home/node
+
+EXPOSE 5678
+CMD ["n8n", "start"]
 USER node
 WORKDIR /home/node
 
