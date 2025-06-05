@@ -14,5 +14,8 @@ RUN fc-cache -fv
 
 USER node
 
+# 設定環境變數
+ENV N8N_DEFAULT_BINARY_DATA_MODE=filesystem
+
 EXPOSE 5678
 CMD ["n8n", "start"]
